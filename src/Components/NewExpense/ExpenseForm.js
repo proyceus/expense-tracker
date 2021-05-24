@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './ExpenseForm.css';
+import NewExpense from './NewExpense';
 
 //commented out code is the second option for handling multiple states
 
@@ -49,17 +50,19 @@ const ExpenseForm = (props) => {
 
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount,
       date: new Date(enteredDate)
     }
 
     props.onSaveExpenseData(expenseData);
 
+    props.onSubmitFormEditing();
     setEnteredTitle('');
     setEnteredAmount('');
     setEnteredDate('');
 
   }
+
 
   return (
     <form onSubmit={submitHandler}>
@@ -78,6 +81,7 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button type="button" onClick={props.onSubmitFormEditing}>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
